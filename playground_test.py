@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
+
 import unittest, time, re
 
 
@@ -20,8 +21,16 @@ class IletisimTest(unittest.TestCase):
 		driver = self.driver
 		driver.get(self.base_url + "/selenium/playground/")
 		title = driver.title
+		# Step 1
 		driver.find_element_by_id("answer1").send_keys(title)
+		# Step 2
 		driver.find_element_by_id("name").send_keys("Kilgore Trout")
+		# Step 3
+		Select(driver.find_element_by_id("occupation")).select_by_visible_text("Science Fiction Author")
+		# Step 4
+		count = len(driver.find_elements_by_class_name("bluebox"))
+		driver.find_element_by_id("answer4").send_keys(count)
+		
 
 		raw_input("")
 		self.assertEqual(u"Merhaba", driver.find_element_by_class_name("welcome").text)
